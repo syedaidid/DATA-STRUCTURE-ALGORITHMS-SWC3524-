@@ -1,3 +1,5 @@
+package Syed;
+
 import java.util.*;
 
 public class Syed {
