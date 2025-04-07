@@ -17,3 +17,4 @@ out/
 *.ear
 *.tmp
 *.bak
+*.ctxt
