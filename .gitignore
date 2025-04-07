@@ -1,0 +1,19 @@
+# Compiled class files
+*.class
+
+# Eclipse/IntelliJ IDEA specific files
+bin/
+out/
+*.iml
+.idea/
+.classpath
+.project
+.settings/
+
+# Other common ignores
+*.log
+*.jar
+*.war
+*.ear
+*.tmp
+*.bak
