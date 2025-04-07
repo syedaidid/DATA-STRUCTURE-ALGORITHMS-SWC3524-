@@ -11,7 +11,7 @@ public class DeliveryRouteOptimization {
             { 18, 40, 0, 35 },
             { 22, 30, 35, 0 }
         };
-    
+
     // Names of locations corresponding to distance matrix indices
     static String[] locations = { "Warehouse A", "Warehouse B", "Center C", "Center D" };
 
@@ -94,12 +94,12 @@ public class DeliveryRouteOptimization {
             path[pos][mask] = locations[pos] + " -> " + locations[0];
             return dist[pos][0]; // Return to start
         }
-        
+
         // Return memoized result if available
         if (memo[pos][mask] != 0) {
             return memo[pos][mask];   
         }
-        
+
         int ans = INF;
 
         // Try all unvisited locations
@@ -107,7 +107,7 @@ public class DeliveryRouteOptimization {
             if ((mask & (1 << location)) == 0) { // If location not visited
                 // Recursively compute cost
                 int newAns = dist[pos][location] + dynamicProgrammingTSPH(location, mask | (1 << location), dist, memo, VisitedAll, path);
-                
+
                 // Update best solution
                 if (newAns < ans) {
                     ans = newAns;
@@ -115,7 +115,7 @@ public class DeliveryRouteOptimization {
                 }
             }
         }
-        
+
         // Memoize and return result
         return memo[pos][mask] = ans;
     }
@@ -153,7 +153,7 @@ public class DeliveryRouteOptimization {
      * @return Minimum cost of complete tour from current state
      */
     private static int tspBacktracking(int pos, int[][] dist, boolean[] visited, int n, int count, int cost,
-            StringBuilder path) {
+    StringBuilder path) {
         // Base case: all cities visited
         if (allVisited(visited)) {
             path.append(" -> ").append(locations[0]); // Complete cycle
@@ -216,7 +216,7 @@ public class DeliveryRouteOptimization {
         for (int i = 1; i < arr.length; i++) {
             int key = arr[i]; // Current element to insert
             int j = i - 1;
-            
+
             // Shift elements greater than key to the right
             while (j >= 0 && arr[j] > key) { 
                 arr[j + 1] = arr[j];
@@ -234,10 +234,10 @@ public class DeliveryRouteOptimization {
      */
     public static int binarySearch(int[] arr, int target) { 
         int left = 0, right = arr.length - 1;
-        
+
         while (left <= right) {
             int mid = left + (right - left) / 2; // Prevent overflow
-            
+
             if (arr[mid] == target)
                 return mid; // Target found
             else if (arr[mid] < target)
@@ -246,5 +246,31 @@ public class DeliveryRouteOptimization {
                 right = mid - 1; // Search left half
         }
         return -1; // Element not found
+    }
+    // Driver method
+    public static void main(String[] args)
+    {
+        System.out.println(greedyTSP(distanceMatrix, locations));
+        System.out.println(dynamicProgrammingTSP(distanceMatrix));
+        System.out.println(backtrackingTSP(distanceMatrix));
+        // Sorting and Searching
+        int[] arr = {8, 3, 5, 1, 9, 2};
+        insertionSort(arr);
+        System.out.println("Sorted Array: " + Arrays.toString(arr));
+        System.out.println("Binary Search (5 found at index): " + binarySearch(arr,
+                5));
+        // // Min-Heap Test
+        // MinHeap heap = new MinHeap();
+        // heap.insert(10);
+        // heap.insert(3);
+        // heap.insert(15);
+        // System.out.println("Min-Heap Extract Min: " + heap.extractMin());
+       
+        // // Splay Tree Test
+        // SplayTree tree = new SplayTree();
+        // tree.insert(20);
+        // tree.insert(10);
+        // tree.insert(30);
+        // System.out.println("Splay Tree Search (10 found): " + tree.search(10));
     }
 }
