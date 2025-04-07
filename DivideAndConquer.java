@@ -1,5 +1,7 @@
 import java.util.*;
-
+/**
+   * @author Alif
+*/
 public class DivideAndConquer {
     
     static int[][] distances = {
